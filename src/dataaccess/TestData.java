@@ -67,7 +67,7 @@ public class TestData {
     List<LibraryMember> members = new ArrayList<LibraryMember>();
     @SuppressWarnings("serial")
 
-    List<Address> addresses = new ArrayList() {
+    List<Address> addresses = new ArrayList<Address>() {
         {
             add(new Address("101 S. Main", "Fairfield", "IA", "52556"));
             add(new Address("51 S. George", "Georgetown", "MI", "65434"));
