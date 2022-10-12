@@ -8,6 +8,7 @@ import business.Address;
 import business.Author;
 import business.Book;
 import business.LibraryMember;
+import controller.LibraryController;
 
 /**
  * This class loads data into the data repository and also
@@ -28,6 +29,8 @@ public class TestData {
         DataAccess da = new DataAccessFacade();
         System.out.println(da.readBooksMap());
         System.out.println(da.readUserMap());
+        LibraryController l = new LibraryController();
+        l.addBookCopy("23-11451");
     }
 
     ///create books
@@ -108,4 +111,5 @@ public class TestData {
             add(new User("103", "111", Auth.BOTH));
         }
     };
+    
 }

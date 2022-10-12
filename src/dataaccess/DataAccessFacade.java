@@ -67,6 +67,7 @@ public class DataAccessFacade implements DataAccess {
 		bookList.forEach(book -> books.put(book.getIsbn(), book));
 		saveToStorage(StorageType.BOOKS, books);
 	}
+	
 	static void loadUserMap(List<User> userList) {
 		HashMap<String, User> users = new HashMap<String, User>();
 		userList.forEach(user -> users.put(user.getId(), user));
@@ -145,5 +146,10 @@ public class DataAccessFacade implements DataAccess {
 		}
 		private static final long serialVersionUID = 5399827794066637059L;
 	}
-	
+
+	@Override
+	public void updateBooks(HashMap<String, Book> bookHash) {
+		saveToStorage(StorageType.BOOKS, bookHash);
+		
+	}
 }
