@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import business.Address;
 import business.Book;
@@ -39,11 +41,12 @@ public class LibraryController {
 		HashMap<String,LibraryMember> members=new HashMap<String,LibraryMember>();
 		members=d.readMemberMap();
 		boolean memberFound=books.containsKey(ibsn);
-		HashMap<String,BookCopy> bookCopies=new HashMap<String,BookCopy>();
-		//bookCopies=dataAccess.readBookCopyMap(ibsn);
-		bookCopies.values();
+		
+		Book book=books.get(ibsn);
+		List<BookCopy> bookCopies=new ArrayList<BookCopy>();
+		//bookCopies=book.getBookCopy();
 		BookCopy bookCopy = null;
-		for(BookCopy b:bookCopies.values())
+		for(BookCopy b:bookCopies)
 		{
 			if(b.isAvailable())
 			{
