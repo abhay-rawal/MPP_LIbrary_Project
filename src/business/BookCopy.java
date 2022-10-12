@@ -5,6 +5,7 @@ import java.util.UUID;
 public class BookCopy {
 	private UUID copyNo;
 	private Book book;
+	private boolean isAvailable;
 	
 	public BookCopy(UUID copyNo, Book book) {
 		super();
@@ -26,5 +27,13 @@ public class BookCopy {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 }

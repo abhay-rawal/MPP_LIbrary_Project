@@ -30,4 +30,9 @@ public class CheckoutRecordEntry {
 		this.dueDate = dueDate;
 	}
 	
+	
+//	public void addCheckoutEntry()
+//	{
+//		
+//	}
 }
