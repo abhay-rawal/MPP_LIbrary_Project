@@ -1,10 +1,11 @@
 package business;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Book {
+public class Book implements Serializable{
 	private String isbn;
 	private List<Author> author;
 	private String title;
@@ -18,7 +19,7 @@ public class Book {
 		this.title = title;
 		this.maxCheckoutLength = maxCheckoutLength;
 		bookCopies = new ArrayList<>();
-		addCopy();
+		//addCopy();
 	}
 	
 	public String getIsbn() {
@@ -47,7 +48,7 @@ public class Book {
 	}
 
 	public void addCopy() {
-		bookCopies.add(new BookCopy(UUID.randomUUID(), this));
+		bookCopies.add(new BookCopy(1, this));
 		
 	}
 }

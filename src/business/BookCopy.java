@@ -1,23 +1,24 @@
 package business;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class BookCopy {
-	private UUID copyNo;
+public class BookCopy  implements Serializable{
+	private int copyNo;
 	private Book book;
 	private boolean isAvailable;
 	
-	public BookCopy(UUID copyNo, Book book) {
+	public BookCopy(int copyNo, Book book) {
 		super();
 		this.copyNo = copyNo;
 		this.book = book;
 	}
 	
-	public UUID getCopyNo() {
+	public int getCopyNo() {
 		return copyNo;
 	}
 
-	public void setCopyNo(UUID copyNo) {
+	public void setCopyNo(int copyNo) {
 		this.copyNo = copyNo;
 	}
 
