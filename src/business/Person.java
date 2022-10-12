@@ -1,6 +1,8 @@
 package business;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable{
 	public Person(String firstName, String lastName, Address address, String phoneNumber) {
 
 		this.firstName = firstName;
