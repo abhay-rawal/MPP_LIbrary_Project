@@ -1,20 +1,22 @@
 package business;
 
+import java.util.UUID;
+
 public class BookCopy {
-	private int copyNo;
+	private UUID copyNo;
 	private Book book;
 	
-	public BookCopy(int copyNo, Book book) {
+	public BookCopy(UUID copyNo, Book book) {
 		super();
 		this.copyNo = copyNo;
 		this.book = book;
 	}
 	
-	public int getCopyNo() {
+	public UUID getCopyNo() {
 		return copyNo;
 	}
 
-	public void setCopyNo(int copyNo) {
+	public void setCopyNo(UUID copyNo) {
 		this.copyNo = copyNo;
 	}
 
