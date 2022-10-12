@@ -1,19 +1,20 @@
 package business;
 
 public class LibraryMember extends Person{
- private String memberID;
+ private String memberId;
 
-public LibraryMember(String memberID) {
-	super();
-	this.memberID = memberID;
+
+public LibraryMember(String memberId, String firstName, String lastName, String PhoneNumber, Address address ) {
+	super(firstName,lastName,address,PhoneNumber);
+	this.memberId = memberId;
 }
 
-public String getMemberID() {
-	return memberID;
+public String getMemberId() {
+	return memberId;
 }
 
 public void setMemberID(String memberID) {
-	this.memberID = memberID;
+	this.memberId = memberID;
 }
  
 }
