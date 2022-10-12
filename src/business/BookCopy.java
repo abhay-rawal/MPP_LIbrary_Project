@@ -6,6 +6,7 @@ import java.util.UUID;
 public class BookCopy  implements Serializable{
 	private int copyNo;
 	private Book book;
+	private boolean isAvailable;
 	
 	public BookCopy(int copyNo, Book book) {
 		super();
@@ -27,5 +28,13 @@ public class BookCopy  implements Serializable{
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 }
