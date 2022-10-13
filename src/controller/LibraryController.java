@@ -37,8 +37,14 @@ public class LibraryController {
 		bookCopyHash = d.readBooksMap();
 	}
 	
-	public void addBook(String isbn, String title, int maxCheckoutLength, List<String> author, int numOfCopies) {
-		
+	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> author, int numOfCopies) {
+		business.Book newBook = new Book(isbn, title, maxCheckoutLength, author);
+		for(int i = 0; i < numOfCopies; i++) {
+			newBook.addCopy();
+		}
+		HashMap<String,Book> sBook = d.readBooksMap();
+		sBook.put(isbn, newBook);
+		d.updateBooks(sBook);
 	}
 	
 	public void findCheckoutEntry(String memberId) {
