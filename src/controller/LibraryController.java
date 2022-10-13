@@ -33,6 +33,8 @@ public class LibraryController {
 		}
 		bookCopyHash.put(ISBN, book);
 		d.updateBooks(bookCopyHash);
+		
+		bookCopyHash = d.readBooksMap();
 	}
 	
 	public void addBook(String isbn, String title, int maxCheckoutLength, List<String> author, int numOfCopies) {
@@ -47,7 +49,7 @@ public class LibraryController {
 		
 	}
 	
-	public boolean checkout(String ibsn, String memberID) {
+	public CheckoutRecord checkout(String ibsn, String memberID) {
 		
 		boolean isCheckoutComplete=false;
 		HashMap<String, Book> books = new HashMap<String, Book>();
@@ -92,7 +94,12 @@ public class LibraryController {
 			
 			isCheckoutComplete=false;
 		}
-		return isCheckoutComplete;
+		HashMap<String, CheckoutRecord> cc = new HashMap<String, CheckoutRecord>();
+		cc=d.readCheckoutMap();
+		if(isCheckoutComplete)
+			return cc.get(memberID);
+		else 
+			return null;
 	}
 	
 }

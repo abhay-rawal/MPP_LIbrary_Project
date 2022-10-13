@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import business.CheckoutRecord;
 import controller.LibraryController;
 import controller.LoginController;
 import dataaccess.Auth;
@@ -62,7 +63,7 @@ public final class View {
 		
 		// To continue
 		Scanner op = new Scanner(System.in);  // Create a Scanner object
-		System.out.println("Library member created successfully. Press enter to continue.");
+		System.out.println("Book Copy added successfully. Press enter to continue.");
 		String con = op.nextLine();
 		
 		// Home page
@@ -83,6 +84,11 @@ public final class View {
 		String isbn = op2.nextLine();
 		
 		LibraryController lc = new LibraryController();
+		CheckoutRecord cc=lc.checkout(isbn, memberID);
+		if(cc!=null)
+		System.out.println("stored");
+		else
+			System.out.println("Checkout failed.");
 		
 		// To continue
 		Scanner op = new Scanner(System.in);  // Create a Scanner object
