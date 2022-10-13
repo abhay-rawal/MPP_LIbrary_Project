@@ -82,6 +82,7 @@ public class LibraryController {
 			d.saveCheckoutRecord(checkoutRecord);
 
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setAvailable(false);
+			books.get(ibsn).getBookCopy().get(bookCopyIndex).setLendedBy(memberID);
 			d.updateBooks(books);
 			
 			isCheckoutComplete=true;

@@ -35,7 +35,7 @@ public class CheckoutRecordEntry implements Serializable{
 	@Override
 	public String toString()
 	{
-		return "checkoutDate:"+checkoutDate+" dueDate"+dueDate;
+		return "checkoutDate:"+checkoutDate+" dueDate:"+dueDate+"\n";
 	}
 	
 //	public void addCheckoutEntry()
