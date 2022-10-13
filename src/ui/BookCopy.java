@@ -20,7 +20,7 @@ public class BookCopy {
 		
 		// To continue
 		Scanner op = new Scanner(System.in);  // Create a Scanner object
-		System.out.println("Library member created successfully. Press enter to continue.");
+		System.out.println("Book Copy added successfully. Press enter to continue.");
 		String con = op.nextLine();
 		
 		// Home page

@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+import business.CheckoutRecord;
 import controller.LibraryController;
 import controller.LoginController;
 import dataaccess.Auth;
@@ -19,10 +20,14 @@ public class CheckOut {
 		String isbn = op2.nextLine();
 		
 		LibraryController lc = new LibraryController();
-		
+		CheckoutRecord cc=lc.checkout(isbn, memberID);
+		if(cc!=null)
+		System.out.println("stored");
+		else
+			System.out.println("Checkout failed.");
 		// To continue
 		Scanner op = new Scanner(System.in);  // Create a Scanner object
-		System.out.println("Checkout successful. Press enter to continue.");
+		System.out.println("Press enter to continue.");
 		String con = op.nextLine();
 		
 		// Home page

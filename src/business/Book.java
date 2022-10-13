@@ -19,7 +19,7 @@ public class Book implements Serializable{
 		this.title = title;
 		this.maxCheckoutLength = maxCheckoutLength;
 		bookCopies = new ArrayList<>();
-		//addCopy();
+		addCopy();
 	}
 	
 	public String getIsbn() {

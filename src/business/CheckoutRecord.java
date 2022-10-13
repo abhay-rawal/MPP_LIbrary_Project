@@ -38,6 +38,15 @@ public class CheckoutRecord implements Serializable{
 		this.memberId = memberId;
 	}
 
-
+//	public String getString()
+//	{
+//		StringBuilder sb=new StringBuilder();
+//		//sb.append( "memberId:"+memberId+"\n"+"Checkout Entry:\n");
+//		for(CheckoutRecordEntry ce:checkoutRecordEntries)
+//		{
+//			sb.append(ce.getString());
+//		}
+//		return sb.toString();
+//	}
 
 }

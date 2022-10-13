@@ -31,7 +31,11 @@ public class CheckoutRecordEntry implements Serializable{
 		this.dueDate = dueDate;
 	}
 	
-	
+//	public String getString()
+//	{
+//		return "checkoutDate:"+checkoutDate+" dueDate"+dueDate;
+//	}
+//	
 //	public void addCheckoutEntry()
 //	{
 //		
