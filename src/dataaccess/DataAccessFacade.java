@@ -40,7 +40,7 @@ public class DataAccessFacade implements DataAccess {
 		HashMap<String, CheckoutRecord> checkouts = readCheckoutMap();
 		String memberId = checkout.getMemberId();
 		checkouts.put(memberId, checkout);
-		saveToStorage(StorageType.MEMBERS, checkouts);	
+		saveToStorage(StorageType.CHECKOUTRECORDS, checkouts);	
 	}
 	@SuppressWarnings("unchecked")
 	public  HashMap<String,Book> readBooksMap() {
