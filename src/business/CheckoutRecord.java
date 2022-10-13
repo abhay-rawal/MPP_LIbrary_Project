@@ -1,10 +1,11 @@
 package business;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckoutRecord {
+public class CheckoutRecord implements Serializable{
 	private String memberId;
 	public List<CheckoutRecordEntry> checkoutRecordEntries;
 
@@ -37,6 +38,15 @@ public class CheckoutRecord {
 		this.memberId = memberId;
 	}
 
-
+//	public String getString()
+//	{
+//		StringBuilder sb=new StringBuilder();
+//		//sb.append( "memberId:"+memberId+"\n"+"Checkout Entry:\n");
+//		for(CheckoutRecordEntry ce:checkoutRecordEntries)
+//		{
+//			sb.append(ce.getString());
+//		}
+//		return sb.toString();
+//	}
 
 }

@@ -31,6 +31,9 @@ public class Book implements Serializable{
 	public List<Author> getAuthor() {
 		return author;
 	}
+	public List<BookCopy> getBookCopy() {
+		return bookCopies;
+	}
 	public void setAuthor(List<Author> author) {
 		this.author = author;
 	}

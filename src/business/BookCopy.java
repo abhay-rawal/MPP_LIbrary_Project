@@ -12,6 +12,7 @@ public class BookCopy  implements Serializable{
 		super();
 		this.copyNo = copyNo;
 		this.book = book;
+		isAvailable=true;
 	}
 	
 	public int getCopyNo() {
