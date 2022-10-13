@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class CheckoutRecordEntry implements Serializable{
+	private static final long serialVersionUID = -9000891200460765128L;
 	private CheckoutRecord checkoutRecord;
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
@@ -31,11 +32,12 @@ public class CheckoutRecordEntry implements Serializable{
 		this.dueDate = dueDate;
 	}
 	
-//	public String getString()
-//	{
-//		return "checkoutDate:"+checkoutDate+" dueDate"+dueDate;
-//	}
-//	
+	@Override
+	public String toString()
+	{
+		return "checkoutDate:"+checkoutDate+" dueDate"+dueDate;
+	}
+	
 //	public void addCheckoutEntry()
 //	{
 //		

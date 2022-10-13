@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckoutRecord implements Serializable{
+	private static final long serialVersionUID = -8763215652969004822L;
 	private String memberId;
 	public List<CheckoutRecordEntry> checkoutRecordEntries;
 
@@ -38,15 +39,16 @@ public class CheckoutRecord implements Serializable{
 		this.memberId = memberId;
 	}
 
-//	public String getString()
-//	{
-//		StringBuilder sb=new StringBuilder();
-//		//sb.append( "memberId:"+memberId+"\n"+"Checkout Entry:\n");
-//		for(CheckoutRecordEntry ce:checkoutRecordEntries)
-//		{
-//			sb.append(ce.getString());
-//		}
-//		return sb.toString();
-//	}
+	@Override
+	public String toString()
+	{
+		StringBuilder sb=new StringBuilder();
+		sb.append( "memberId:"+memberId+"\n"+"Checkout Entry:\n");
+		for(CheckoutRecordEntry ce:checkoutRecordEntries)
+		{
+			sb.append(ce);
+		}
+		return sb.toString();
+	}
 
 }
