@@ -31,6 +31,8 @@ public class LibraryController {
 		{
 			book.addCopy();
 		}
+		else 
+			return;
 		bookCopyHash.put(ISBN, book);
 		d.updateBooks(bookCopyHash);
 		
