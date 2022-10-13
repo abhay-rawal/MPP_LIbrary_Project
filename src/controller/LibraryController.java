@@ -1,11 +1,12 @@
 package controller;
-
-import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.List;
 
 import business.Address;
 import business.Author;
+import business.Book;
+import business.BookCopy;
+import business.CheckoutRecord;
 import business.LibraryMember;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -45,4 +46,53 @@ public class LibraryController {
 	public void overDueList(String isbn) {
 		
 	}
+	
+	public boolean checkout(String ibsn, String memberID) {
+		
+		boolean isCheckoutComplete=false;
+		HashMap<String, Book> books = new HashMap<String, Book>();
+		books = d.readBooksMap();
+		boolean bookFound = books.containsKey(ibsn);
+
+		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
+		members = d.readMemberMap();
+		boolean memberFound = books.containsKey(ibsn);
+
+		Book book = books.get(ibsn);
+		List<BookCopy> bookCopies;
+		bookCopies = book.getBookCopy();
+		BookCopy bookCopy = null;
+		int bookCopyIndex = -1;
+		for (BookCopy b : bookCopies) {
+			bookCopyIndex++;
+			if (b.isAvailable()) {
+				bookCopy = b;
+
+				break;
+			}
+
+		}
+		if (bookCopy != null && bookFound && memberFound) {
+			CheckoutRecord checkoutRecord = new CheckoutRecord(memberID);
+			checkoutRecord.addCheckoutEntry(bookCopy);
+			d.saveCheckoutRecord(checkoutRecord);
+
+			books.get(ibsn).getBookCopy().get(bookCopyIndex).setAvailable(false);
+			d.updateBooks(books);
+			
+			isCheckoutComplete=true;
+		} else {
+			if (!memberFound)
+				System.out.println("Member not found.");
+
+			if (!bookFound)
+				System.out.println("Book not found.");
+			if (bookCopy == null)
+				System.out.println("Book Copy not avialable.");
+			
+			isCheckoutComplete=false;
+		}
+		return isCheckoutComplete;
+	}
+	
 }

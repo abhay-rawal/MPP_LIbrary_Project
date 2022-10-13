@@ -1,10 +1,11 @@
 package business;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckoutRecord {
+public class CheckoutRecord implements Serializable{
 	private String memberId;
 	public List<CheckoutRecordEntry> checkoutRecordEntries;
 
