@@ -21,7 +21,7 @@ public class Home {
 	}
 
 	public void goToHome() {
-		System.out.println("\n ************************************************** \n");
+		separator();
 		System.out.println("WELCOME TO THE HOME\n\n");
 
 		Scanner op = new Scanner(System.in); // Create a Scanner object
@@ -62,68 +62,62 @@ public class Home {
 			break;
 		case 1:
 			if (this.auth == Auth.LIBRARIAN || this.auth == Auth.BOTH) {
-				System.out.println("\n ************************************************** \n");
+				separator();
 				// Go to Checkout a book
 				co = new CheckOut();
 				co.addCheckout();
 			} else {
-				System.out.println("You don't have permission to access this option");
-				this.goToHome();
+				permissionDenied();
 			}
 			break;
 		case 2:
 			if (this.auth == Auth.ADMIN || this.auth == Auth.BOTH) {
-				System.out.println("\n ************************************************** \n");
+				separator();
 				// Add a new library member
 				lm = new LibraryMember();
 				lm.addLibraryMember();
 			} else {
-				System.out.println("You don't have permission to access this option");
-				this.goToHome();
+				permissionDenied();
 			}
 			break;
 		case 3:
 			if (this.auth == Auth.ADMIN || this.auth == Auth.BOTH) {
-				System.out.println("\n ************************************************** \n");
+				separator();
 				// Add a new library member
 				bc = new BookCopy();
 				bc.addBookCopy();
 			} else {
-				System.out.println("You don't have permission to access this option");
-				this.goToHome();
+				permissionDenied();
 			}
 			break;
 		case 4:
 			if (this.auth == Auth.ADMIN || this.auth == Auth.BOTH) {
-				System.out.println("\n ************************************************** \n");
+				separator();
 				// Add a new book
 				b = new Book();
 				b.addNewBook();
 			} else {
-				System.out.println("You don't have permission to access this option");
-				this.goToHome();
+				permissionDenied();
 			}
 			break;
 		case 5:
 			if (this.auth == Auth.LIBRARIAN || this.auth == Auth.BOTH) {
-				System.out.println("\n ************************************************** \n");
+				separator();
 				// Find checkout history
 				ch = new CheckOutHistory();
 				ch.fndHistory();
 			} else {
-				System.out.println("You don't have permission to access this option");
-				this.goToHome();
+				permissionDenied();
 			}
 			break;
 		case 6:
 			if (this.auth == Auth.LIBRARIAN || this.auth == Auth.BOTH) {
-				System.out.println("\n ************************************************** \n");
+				separator();
 				// Find overdue
 				od = new Overdue();
 				od.fndOverdue();
 			} else {
-				System.out.println("You don't have permission to access this option");
-				this.goToHome();
+				permissionDenied();
 			}
 			break;
 		default:
@@ -131,5 +125,14 @@ public class Home {
 			this.goToHome();
 			break;
 		}
+	}
+	
+	public void separator() {
+		System.out.println("\n--------------------------------------------------------\n");
+	}
+	
+	public void permissionDenied() {
+		System.out.println("You don't have permission to access this option");
+		this.goToHome();
 	}
 }
