@@ -3,17 +3,9 @@ package ui;
 import java.util.Scanner;
 
 import dataaccess.Auth;
-import ui.LibraryMember;
-import ui.BookCopy;
 
 public class Home {
 	private Auth auth;
-	private LibraryMember lm;
-	private BookCopy bc;
-	private Book b;
-	private CheckOutHistory ch;
-	private Overdue od;
-	private CheckOut co;
 
 	public Home(Auth auth) {
 		super();
@@ -64,8 +56,7 @@ public class Home {
 			if (this.auth == Auth.LIBRARIAN || this.auth == Auth.BOTH) {
 				separator();
 				// Go to Checkout a book
-				co = new CheckOut();
-				co.addCheckout();
+				View.addCheckout();
 			} else {
 				permissionDenied();
 			}
@@ -74,8 +65,7 @@ public class Home {
 			if (this.auth == Auth.ADMIN || this.auth == Auth.BOTH) {
 				separator();
 				// Add a new library member
-				lm = new LibraryMember();
-				lm.addLibraryMember();
+				View.addLibraryMember();
 			} else {
 				permissionDenied();
 			}
@@ -84,8 +74,7 @@ public class Home {
 			if (this.auth == Auth.ADMIN || this.auth == Auth.BOTH) {
 				separator();
 				// Add a new library member
-				bc = new BookCopy();
-				bc.addBookCopy();
+				View.addBookCopy();
 			} else {
 				permissionDenied();
 			}
@@ -94,8 +83,7 @@ public class Home {
 			if (this.auth == Auth.ADMIN || this.auth == Auth.BOTH) {
 				separator();
 				// Add a new book
-				b = new Book();
-				b.addNewBook();
+				View.addNewBook();
 			} else {
 				permissionDenied();
 			}
@@ -104,8 +92,7 @@ public class Home {
 			if (this.auth == Auth.LIBRARIAN || this.auth == Auth.BOTH) {
 				separator();
 				// Find checkout history
-				ch = new CheckOutHistory();
-				ch.fndHistory();
+				View.fndHistory();
 			} else {
 				permissionDenied();
 			}
@@ -114,8 +101,7 @@ public class Home {
 			if (this.auth == Auth.LIBRARIAN || this.auth == Auth.BOTH) {
 				separator();
 				// Find overdue
-				od = new Overdue();
-				od.fndOverdue();
+				View.findOverdue();
 			} else {
 				permissionDenied();
 			}
