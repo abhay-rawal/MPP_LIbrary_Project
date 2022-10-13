@@ -31,6 +31,8 @@ public class LibraryController {
 		{
 			book.addCopy();
 		}
+		else 
+			return;
 		bookCopyHash.put(ISBN, book);
 		d.updateBooks(bookCopyHash);
 		
@@ -86,6 +88,7 @@ public class LibraryController {
 			d.saveCheckoutRecord(checkoutRecord);
 
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setAvailable(false);
+			books.get(ibsn).getBookCopy().get(bookCopyIndex).setLendedBy(memberID);
 			d.updateBooks(books);
 			
 			isCheckoutComplete=true;

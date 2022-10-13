@@ -51,7 +51,7 @@ public class Book implements Serializable{
 	}
 
 	public void addCopy() {
-		bookCopies.add(new BookCopy(UUID.randomUUID(), this));
+		bookCopies.add(new BookCopy(this.bookCopies.size()+1, this));
 		
 	}
 }
