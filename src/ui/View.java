@@ -73,7 +73,7 @@ public final class View {
 	}
 	
 	public static void addCheckout() {
-		System.out.println("ADD NEW BOOK\n\n");
+		System.out.println("CHECKOUT BOOK\n\n");
 		
 		Scanner op1 = new Scanner(System.in);  // Create a Scanner object
 		System.out.println("Please enter the member ID: ");
@@ -86,13 +86,15 @@ public final class View {
 		LibraryController lc = new LibraryController();
 		CheckoutRecord cc=lc.checkout(isbn, memberID);
 		if(cc!=null)
-		System.out.println("stored");
+		{
+			System.out.println(cc);
+			System.out.println("Checkout successful. Press enter to continue.");
+		}
 		else
-			System.out.println("Checkout failed.");
+			System.out.println("Checkout failed. Press enter to continue.");
 		
 		// To continue
 		Scanner op = new Scanner(System.in);  // Create a Scanner object
-		System.out.println("Checkout successful. Press enter to continue.");
 		String con = op.nextLine();
 		
 		// Home page
