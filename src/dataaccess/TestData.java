@@ -7,6 +7,7 @@ import java.util.List;
 import business.Address;
 import business.Author;
 import business.Book;
+import business.CheckoutRecord;
 import business.LibraryMember;
 import controller.LibraryController;
 
@@ -26,6 +27,7 @@ public class TestData {
         td.bookData();
         td.libraryMemberData();
         td.userData();
+        td.checkoutRecord();
         DataAccess da = new DataAccessFacade();
         System.out.println(da.readBooksMap());
         System.out.println(da.readUserMap());
@@ -47,6 +49,10 @@ public class TestData {
     public void userData() {
         DataAccessFacade.loadUserMap(allUsers);
     }
+    
+    public void checkoutRecord() {
+        DataAccessFacade.loadCheckoutMap(checkouts);
+    }
 
     //create library members
     public void libraryMemberData() {
@@ -67,6 +73,17 @@ public class TestData {
     }
 
     ///////////// DATA //////////////
+    
+    @SuppressWarnings("serial")
+    List<CheckoutRecord> checkouts = new ArrayList<CheckoutRecord>() {
+        {
+            add(new CheckoutRecord("1001"));
+            add(new CheckoutRecord("1002"));
+        }
+    };
+    
+    
+    
     List<LibraryMember> members = new ArrayList<LibraryMember>();
     @SuppressWarnings("serial")
 
