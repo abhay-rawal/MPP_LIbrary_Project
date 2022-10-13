@@ -27,7 +27,11 @@ public class Login {
 	}
 	
 	public boolean askForLogin() {
-		System.out.println("LIBRARY MANAGEMENT SYSTEM\n");
+		System.out.println("--------------------------");
+		System.out.println("LIBRARY MANAGEMENT SYSTEM");
+		System.out.println("--------------------------\n");
+		
+		System.out.println("Please enter your credentials to Login\n\n");
 		
 		Scanner myObj1 = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Enter your ID:");
