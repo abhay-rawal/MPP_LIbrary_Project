@@ -58,6 +58,7 @@ public class LibraryController {
 			return null;
 	}
 	
+	
 	public void overDueList(String isbn) {
 		
 	}
@@ -88,7 +89,12 @@ public class LibraryController {
 
 		}
 		if (bookCopy != null && bookFound && memberFound) {
-			CheckoutRecord checkoutRecord = new CheckoutRecord(memberID);
+			CheckoutRecord checkoutRecord;
+			CheckoutRecord oldRecord=findCheckoutEntry(memberID);
+			if(oldRecord!=null)
+				checkoutRecord=oldRecord;
+			else
+				checkoutRecord= new CheckoutRecord(memberID);
 			checkoutRecord.addCheckoutEntry(bookCopy);
 			d.saveCheckoutRecord(checkoutRecord);
 
