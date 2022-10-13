@@ -2,8 +2,10 @@ package controller;
 
 import java.awt.print.Book;
 import java.util.HashMap;
+import java.util.List;
 
 import business.Address;
+import business.Author;
 import business.LibraryMember;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -30,5 +32,17 @@ public class LibraryController {
 		}
 		bookCopyHash.put(ISBN, book);
 		d.updateBooks(bookCopyHash);
+	}
+	
+	public void addBook(String isbn, String title, int maxCheckoutLength, List<String> author, int numOfCopies) {
+		
+	}
+	
+	public void findCheckoutEntry(String memberId) {
+		
+	}
+	
+	public void overDueList(String isbn) {
+		
 	}
 }
