@@ -86,7 +86,6 @@ public class Home {
 
 		default:
 			System.out.println("You selected a wrong option");
-			System.out.println("\n ************************************************** \n");
 			this.goToHome();
 			break;
 		}
