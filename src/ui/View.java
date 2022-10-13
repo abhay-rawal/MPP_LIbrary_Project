@@ -162,8 +162,14 @@ public final class View {
 		String memberId = op1.nextLine();
 		
 		LibraryController lc = new LibraryController();
-		lc.findCheckoutEntry(memberId);
-		
+		CheckoutRecord checkoutRecord=lc.findCheckoutEntry(memberId);
+		if(checkoutRecord!=null)
+		{
+			System.out.println(checkoutRecord);
+			
+		}
+		else
+			System.out.println("Failed to check record for member:"+memberId+"Press enter to continue.");
 		// To continue
 		Scanner op = new Scanner(System.in);  // Create a Scanner object
 		System.out.println("Press enter to continue.");
