@@ -46,6 +46,7 @@ public class Home {
 			optionsStr.append(options[i]);
 			optionsStr.append("\n");
 		}
+		optionsStr.append("0: Logout");
 		
 		// Move by the option
 		System.out.println(optionsStr);
@@ -82,6 +83,10 @@ public class Home {
 				System.out.println("You don't have permission to access this option");
 				this.goToHome();
 			}
+			break;
+			
+		case 0:
+			Main.main(null);
 			break;
 
 		default:

@@ -50,6 +50,11 @@ public class Login {
 	    	System.out.println("Hello, you are succesfully logged in as " + auth);
 	    }else {
 	    	System.out.println("Your user id & password doesn't matched");
+	    	// To continue
+			Scanner op = new Scanner(System.in);  // Create a Scanner object
+			System.out.println("Press enter to continue.");
+			String con = op.nextLine();
+			Main.main(null);
 	    }
 	    return login.checkUser();
 	}
