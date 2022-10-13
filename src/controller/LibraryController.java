@@ -49,8 +49,13 @@ public class LibraryController {
 		d.updateBooks(sBook);
 	}
 	
-	public void findCheckoutEntry(String memberId) {
-		
+	public CheckoutRecord findCheckoutEntry(String memberId) {
+		HashMap<String, CheckoutRecord> cc = new HashMap<String, CheckoutRecord>();
+		cc=d.readCheckoutMap();
+		if(cc!=null)
+			return cc.get(memberId);
+		else 
+			return null;
 	}
 	
 	public void overDueList(String isbn) {
@@ -103,10 +108,8 @@ public class LibraryController {
 			
 			isCheckoutComplete=false;
 		}
-		HashMap<String, CheckoutRecord> cc = new HashMap<String, CheckoutRecord>();
-		cc=d.readCheckoutMap();
 		if(isCheckoutComplete)
-			return cc.get(memberID);
+			return findCheckoutEntry(memberID);
 		else 
 			return null;
 	}
