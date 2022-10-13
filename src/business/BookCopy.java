@@ -7,6 +7,7 @@ public class BookCopy  implements Serializable{
 	private int copyNo;
 	private Book book;
 	private boolean isAvailable;
+	private String lendedBy;
 	
 	public BookCopy(int copyNo, Book book) {
 		super();
@@ -37,5 +38,13 @@ public class BookCopy  implements Serializable{
 
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+
+	public String getLendedBy() {
+		return lendedBy;
+	}
+
+	public void setLendedBy(String lendedBy) {
+		this.lendedBy = lendedBy;
 	}
 }
