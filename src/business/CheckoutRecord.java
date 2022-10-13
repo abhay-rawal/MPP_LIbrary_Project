@@ -22,11 +22,11 @@ public class CheckoutRecord implements Serializable{
 		LocalDate today = LocalDate.now();
 		int maxCheckoutLength = bookCopy.getBook().getMaxCheckoutLength();
 		LocalDate dueDate = today.plusDays(maxCheckoutLength);
-		CheckoutRecordEntry checkoutEntry = new CheckoutRecordEntry(this, today, dueDate);
+		CheckoutRecordEntry checkoutEntry = new CheckoutRecordEntry(this, today, dueDate,bookCopy);
 		checkoutRecordEntries.add(checkoutEntry);
 
 	}
-
+	
 
 
 	public String getMemberId() {
