@@ -9,6 +9,7 @@ public class CheckoutRecordEntry implements Serializable{
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
 	private BookCopy bookCopy;
+	
 	public CheckoutRecordEntry(CheckoutRecord checkoutRecord, LocalDate checkoutDate, LocalDate dueDate,BookCopy bookCopy) {
 		this.checkoutRecord = checkoutRecord;
 		this.checkoutDate = checkoutDate;

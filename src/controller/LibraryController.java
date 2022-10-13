@@ -1,4 +1,5 @@
 package controller;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -27,82 +28,77 @@ public class LibraryController {
 
 	public void addBookCopy(String ISBN) {
 		HashMap<String, business.Book> bookCopyHash = d.readBooksMap();
-		business.Book book = (business.Book)bookCopyHash.get(ISBN);
-		if(book!=null)
-		{
+		business.Book book = (business.Book) bookCopyHash.get(ISBN);
+		if (book != null) {
 			book.addCopy();
-		}
-		else 
+		} else
 			return;
 		bookCopyHash.put(ISBN, book);
 		d.updateBooks(bookCopyHash);
-		
+
 		bookCopyHash = d.readBooksMap();
 	}
-	
+
 	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> author, int numOfCopies) {
 		business.Book newBook = new Book(isbn, title, maxCheckoutLength, author);
-		for(int i = 0; i < numOfCopies; i++) {
+		for (int i = 0; i < numOfCopies; i++) {
 			newBook.addCopy();
 		}
-		HashMap<String,Book> sBook = d.readBooksMap();
+		HashMap<String, Book> sBook = d.readBooksMap();
 		sBook.put(isbn, newBook);
 		d.updateBooks(sBook);
 	}
-	
+
 	public CheckoutRecord findCheckoutEntry(String memberId) {
-		HashMap<String, CheckoutRecord> cc = new HashMap<String, CheckoutRecord>();
-		cc=d.readCheckoutMap();
-		if(cc!=null)
-			return cc.get(memberId);
-		else 
+		HashMap<String, LibraryMember> mm = new HashMap<String, LibraryMember>();
+		mm = d.readMemberMap();
+
+		if (mm != null)
+			return mm.get(memberId).getCheckoutRecord();
+		else
 			return null;
 	}
-	
+
 	@SuppressWarnings("static-access")
 	public void overDueList(String isbn) {
 		HashMap<String, business.Book> bookCopyHash = d.readBooksMap();
-		business.Book book = (business.Book)bookCopyHash.get(isbn);
-		if(book!=null)
-		{
+		business.Book book = (business.Book) bookCopyHash.get(isbn);
+		if (book != null) {
 			String outPutBooks = "";
-			System.out.println(outPutBooks.format("The books ISBN : %s. %n The books title : %s. %n ", book.getIsbn(),book.getTitle()));
+			System.out.println(outPutBooks.format("The books ISBN : %s. %n The books title : %s. %n ", book.getIsbn(),
+					book.getTitle()));
 			System.out.println("The Information on the book copies:");
-			for (BookCopy  item: book.getBookCopy()) {
-				System.out.println("Book Copy Number :" +item.getCopyNo());
-				if(!item.isAvailable())
-				{
-					LibraryMember member= getLibraryMemberAndDueDate(item.getLendedBy());
-					System.out.println("Lended By : " + member.getMemberId() + "->" + member.getFirstName() );
+			for (BookCopy item : book.getBookCopy()) {
+				System.out.println("Book Copy Number :" + item.getCopyNo());
+				if (!item.isAvailable()) {
+					LibraryMember member = getLibraryMemberAndDueDate(item.getLendedBy());
+					System.out.println("Lended By : " + member.getMemberId() + "->" + member.getFirstName());
 				}
-					
+
 			}
-		}
-		else 
-		{
+		} else {
 			System.out.println("No books available with isbn No: " + isbn);
 		}
-		
-		
+
 	}
-	
+
 	private LibraryMember getLibraryMemberAndDueDate(String LendedBy) {
-		
+
 		HashMap<String, LibraryMember> memberHash = d.readMemberMap();
-		LibraryMember member = (LibraryMember)memberHash.get(LendedBy);
+		LibraryMember member = (LibraryMember) memberHash.get(LendedBy);
 		return member;
 	}
 
 	public CheckoutRecord checkout(String ibsn, String memberID) {
-		
-		boolean isCheckoutComplete=false;
+
+		boolean isCheckoutComplete = false;
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		books = d.readBooksMap();
 		boolean bookFound = books.containsKey(ibsn);
 
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		members = d.readMemberMap();
-		boolean memberFound = books.containsKey(ibsn);
+		boolean memberFound = members.containsKey(memberID);
 
 		Book book = books.get(ibsn);
 		List<BookCopy> bookCopies;
@@ -119,15 +115,23 @@ public class LibraryController {
 
 		}
 		if (bookCopy != null && bookFound && memberFound) {
-			CheckoutRecord checkoutRecord = new CheckoutRecord(memberID);
+			LibraryMember lm = members.get(memberID);
+			CheckoutRecord checkoutRecord;
+			CheckoutRecord oldRecord = members.get(memberID).getCheckoutRecord();
+			if (oldRecord != null)
+				checkoutRecord = oldRecord;
+			else
+				checkoutRecord = new CheckoutRecord();
 			checkoutRecord.addCheckoutEntry(bookCopy);
-			d.saveCheckoutRecord(checkoutRecord);
+			lm.setCheckoutRecord(checkoutRecord);
+			members.put(memberID, lm);
+			d.updateMembers(members);
 
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setAvailable(false);
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setLendedBy(memberID);
 			d.updateBooks(books);
-			
-			isCheckoutComplete=true;
+
+			isCheckoutComplete = true;
 		} else {
 			if (!memberFound)
 				System.out.println("Member not found.");
@@ -136,13 +140,13 @@ public class LibraryController {
 				System.out.println("Book not found.");
 			if (bookCopy == null)
 				System.out.println("Book Copy not avialable.");
-			
-			isCheckoutComplete=false;
+
+			isCheckoutComplete = false;
 		}
-		if(isCheckoutComplete)
+		if (isCheckoutComplete)
 			return findCheckoutEntry(memberID);
-		else 
+		else
 			return null;
 	}
-	
+
 }
