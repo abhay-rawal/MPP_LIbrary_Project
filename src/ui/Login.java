@@ -27,7 +27,11 @@ public class Login {
 	}
 	
 	public boolean askForLogin() {
-		System.out.println("LIBRARY MANAGEMENT SYSTEM\n");
+		System.out.println("--------------------------");
+		System.out.println("LIBRARY MANAGEMENT SYSTEM");
+		System.out.println("--------------------------\n");
+		
+		System.out.println("Please enter your credentials to Login\n\n");
 		
 		Scanner myObj1 = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Enter your ID:");
@@ -46,6 +50,11 @@ public class Login {
 	    	System.out.println("Hello, you are succesfully logged in as " + auth);
 	    }else {
 	    	System.out.println("Your user id & password doesn't matched");
+	    	// To continue
+			Scanner op = new Scanner(System.in);  // Create a Scanner object
+			System.out.println("Press enter to continue.");
+			String con = op.nextLine();
+			Main.main(null);
 	    }
 	    return login.checkUser();
 	}

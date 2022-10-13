@@ -1,10 +1,9 @@
 package controller;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import business.Address;
+import business.Author;
 import business.Book;
 import business.BookCopy;
 import business.CheckoutRecord;
@@ -27,15 +26,30 @@ public class LibraryController {
 
 	public void addBookCopy(String ISBN) {
 		HashMap<String, business.Book> bookCopyHash = d.readBooksMap();
-		business.Book book = (business.Book) bookCopyHash.get(ISBN);
-		if (book != null) {
+		business.Book book = (business.Book)bookCopyHash.get(ISBN);
+		if(book!=null)
+		{
 			book.addCopy();
 		}
 		bookCopyHash.put(ISBN, book);
 		d.updateBooks(bookCopyHash);
 	}
-
-	public void checkout(String ibsn, String memberID) {
+	
+	public void addBook(String isbn, String title, int maxCheckoutLength, List<String> author, int numOfCopies) {
+		
+	}
+	
+	public void findCheckoutEntry(String memberId) {
+		
+	}
+	
+	public void overDueList(String isbn) {
+		
+	}
+	
+	public boolean checkout(String ibsn, String memberID) {
+		
+		boolean isCheckoutComplete=false;
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		books = d.readBooksMap();
 		boolean bookFound = books.containsKey(ibsn);
@@ -65,6 +79,8 @@ public class LibraryController {
 
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setAvailable(false);
 			d.updateBooks(books);
+			
+			isCheckoutComplete=true;
 		} else {
 			if (!memberFound)
 				System.out.println("Member not found.");
@@ -73,7 +89,10 @@ public class LibraryController {
 				System.out.println("Book not found.");
 			if (bookCopy == null)
 				System.out.println("Book Copy not avialable.");
+			
+			isCheckoutComplete=false;
 		}
-
+		return isCheckoutComplete;
 	}
+	
 }
