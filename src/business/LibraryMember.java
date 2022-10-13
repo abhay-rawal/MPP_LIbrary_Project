@@ -1,7 +1,11 @@
 package business;
 
 public class LibraryMember extends Person{
- private String memberId;
+ /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3166337006926144442L;
+private String memberId;
 
 
 public LibraryMember(String memberId, String firstName, String lastName, String PhoneNumber, Address address ) {

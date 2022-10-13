@@ -1,5 +1,6 @@
 package controller;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import business.Address;
@@ -58,10 +59,40 @@ public class LibraryController {
 			return null;
 	}
 	
+	@SuppressWarnings("static-access")
 	public void overDueList(String isbn) {
+		HashMap<String, business.Book> bookCopyHash = d.readBooksMap();
+		business.Book book = (business.Book)bookCopyHash.get(isbn);
+		if(book!=null)
+		{
+			String outPutBooks = "";
+			System.out.println(outPutBooks.format("The books ISBN : %s. %n The books title : %s. %n ", book.getIsbn(),book.getTitle()));
+			System.out.println("The Information on the book copies:");
+			for (BookCopy  item: book.getBookCopy()) {
+				System.out.println("Book Copy Number :" +item.getCopyNo());
+				if(!item.isAvailable())
+				{
+					LibraryMember member= getLibraryMemberAndDueDate(item.getLendedBy());
+					System.out.println("Lended By : " + member.getMemberId() + "->" + member.getFirstName() );
+				}
+					
+			}
+		}
+		else 
+		{
+			System.out.println("No books available with isbn No: " + isbn);
+		}
+		
 		
 	}
 	
+	private LibraryMember getLibraryMemberAndDueDate(String LendedBy) {
+		
+		HashMap<String, LibraryMember> memberHash = d.readMemberMap();
+		LibraryMember member = (LibraryMember)memberHash.get(LendedBy);
+		return member;
+	}
+
 	public CheckoutRecord checkout(String ibsn, String memberID) {
 		
 		boolean isCheckoutComplete=false;
