@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -9,9 +11,11 @@ import business.Author;
 import business.Book;
 import business.BookCopy;
 import business.CheckoutRecord;
+import business.CheckoutRecordEntry;
 import business.LibraryMember;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+
 
 public class LibraryController {
 	DataAccess d;
@@ -71,8 +75,24 @@ public class LibraryController {
 			for (BookCopy item : book.getBookCopy()) {
 				System.out.println("Book Copy Number :" + item.getCopyNo());
 				if (!item.isAvailable()) {
-					LibraryMember member = getLibraryMemberAndDueDate(item.getLendedBy());
-					System.out.println("Lended By : " + member.getMemberId() + "->" + member.getFirstName());
+					LibraryMember member = getLibraryMember(item.getLendedBy());
+					System.out.println("Lended to : " + member.getMemberId() + "->" + member.getFirstName());
+					CheckoutRecordEntry checkoutRecordEntry = getCheckoutEntry(book.getIsbn(), item.getCopyNo(), member);
+					if(checkoutRecordEntry!=null)
+					{
+						LocalDate dueDate = checkoutRecordEntry.getDueDate();
+						long daysBetween = LocalDate.now().until(LocalDate.of(2022, 10, 8), ChronoUnit.DAYS);
+						if(daysBetween < 0)
+						{
+						System.out.println("Book Was Due on :" + dueDate.toString() + " and have been reutrned before " + (-1*daysBetween) + " days /n /n");
+						}
+						else
+						System.out.println("Book is Due on :" + dueDate.toString() + " and should be reutrned on " + daysBetween + " days /n /n");
+					}
+				}
+				else
+				{
+					System.out.println("No OverDue \n \n");
 				}
 
 			}
@@ -82,7 +102,21 @@ public class LibraryController {
 
 	}
 
-	private LibraryMember getLibraryMemberAndDueDate(String LendedBy) {
+	private CheckoutRecordEntry getCheckoutEntry(String ISBN, int CopyNum,LibraryMember member) {
+		
+		List<CheckoutRecordEntry> cRE = member.getCheckoutRecord().getCheckoutRecordEntries(); 
+		for (CheckoutRecordEntry item : cRE) {
+			String itemISBN = item.getBookCopy().getBook().getIsbn();
+			if((item.getBookCopy().getCopyNo() == CopyNum) && (ISBN.equals(itemISBN)))
+			{
+				return item;
+			}
+		}
+		return null;
+		
+	}
+
+	private LibraryMember getLibraryMember(String LendedBy) {
 
 		HashMap<String, LibraryMember> memberHash = d.readMemberMap();
 		LibraryMember member = (LibraryMember) memberHash.get(LendedBy);

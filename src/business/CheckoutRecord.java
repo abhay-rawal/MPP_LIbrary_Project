@@ -8,7 +8,25 @@ import java.util.List;
 public class CheckoutRecord implements Serializable{
 	private static final long serialVersionUID = -8763215652969004822L;
 	//private String memberId;
-	public List<CheckoutRecordEntry> checkoutRecordEntries;
+	private List<CheckoutRecordEntry> checkoutRecordEntries;
+
+	public List<CheckoutRecordEntry> getCheckoutRecordEntries() {
+		return checkoutRecordEntries;
+	}
+
+
+
+	public void setCheckoutRecordEntries(List<CheckoutRecordEntry> checkoutRecordEntries) {
+		this.checkoutRecordEntries = checkoutRecordEntries;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 	public CheckoutRecord() {
 		checkoutRecordEntries = new ArrayList<>();
