@@ -6,6 +6,10 @@ import java.util.List;
 
 
 public class Book implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9197159489691815039L;
 	private String isbn;
 	private List<Author> author;
 	private String title;
@@ -54,4 +58,5 @@ public class Book implements Serializable{
 		bookCopies.add(new BookCopy(this.bookCopies.size()+1, this));
 		
 	}
+	
 }
