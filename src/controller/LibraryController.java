@@ -49,9 +49,16 @@ public class LibraryController {
 		d.updateBooks(sBook);
 	}
 	
-	public void findCheckoutEntry(String memberId) {
+	public CheckoutRecord findCheckoutEntry(String memberId) {
+		HashMap<String, LibraryMember> mm = new HashMap<String, LibraryMember>();
+		mm=d.readMemberMap();
 		
+		if(mm!=null)
+			return mm.get(memberId).getCheckoutRecord();
+		else 
+			return null;
 	}
+	
 	
 	public void overDueList(String isbn) {
 		
@@ -66,7 +73,7 @@ public class LibraryController {
 
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		members = d.readMemberMap();
-		boolean memberFound = books.containsKey(ibsn);
+		boolean memberFound = members.containsKey(memberID);
 
 		Book book = books.get(ibsn);
 		List<BookCopy> bookCopies;
@@ -83,9 +90,17 @@ public class LibraryController {
 
 		}
 		if (bookCopy != null && bookFound && memberFound) {
-			CheckoutRecord checkoutRecord = new CheckoutRecord(memberID);
+			LibraryMember lm=members.get(memberID);
+			CheckoutRecord checkoutRecord;
+			CheckoutRecord oldRecord=members.get(memberID).getCheckoutRecord();
+			if(oldRecord!=null)
+				checkoutRecord=oldRecord;
+			else
+				checkoutRecord= new CheckoutRecord();
 			checkoutRecord.addCheckoutEntry(bookCopy);
-			d.saveCheckoutRecord(checkoutRecord);
+			lm.setCheckoutRecord(checkoutRecord);
+			members.put(memberID, lm);
+			d.updateMembers(members);
 
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setAvailable(false);
 			books.get(ibsn).getBookCopy().get(bookCopyIndex).setLendedBy(memberID);
@@ -103,10 +118,8 @@ public class LibraryController {
 			
 			isCheckoutComplete=false;
 		}
-		HashMap<String, CheckoutRecord> cc = new HashMap<String, CheckoutRecord>();
-		cc=d.readCheckoutMap();
 		if(isCheckoutComplete)
-			return cc.get(memberID);
+			return findCheckoutEntry(memberID);
 		else 
 			return null;
 	}

@@ -34,14 +34,7 @@ public class DataAccessFacade implements DataAccess {
 		mems.put(memberId, member);
 		saveToStorage(StorageType.MEMBERS, mems);	
 	}
-	@Override
-	public void saveCheckoutRecord(CheckoutRecord checkout) {
-		// TODO Auto-generated method stub
-		HashMap<String, CheckoutRecord> checkouts = readCheckoutMap();
-		String memberId = checkout.getMemberId();
-		checkouts.put(memberId, checkout);
-		saveToStorage(StorageType.CHECKOUTRECORDS, checkouts);	
-	}
+
 	@SuppressWarnings("unchecked")
 	public  HashMap<String,Book> readBooksMap() {
 		//Returns a Map with name/value pairs being
@@ -65,22 +58,11 @@ public class DataAccessFacade implements DataAccess {
 		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public HashMap<String, CheckoutRecord> readCheckoutMap() {
-		//Returns a Map with name/value pairs being
-				//   memberId -> CheckoutRecord
-				return (HashMap<String, CheckoutRecord>) readFromStorage(
-						StorageType.CHECKOUTRECORDS);
-	}
 	
 	/////load methods - these place test data into the storage area
 	///// - used just once at startup  
 	
-	static void loadCheckoutMap(List<CheckoutRecord> checkOutRecordList) {
-		HashMap<String, CheckoutRecord> checkoutRecords = new HashMap<String, CheckoutRecord>();
-		checkOutRecordList.forEach(checkout -> checkoutRecords.put(checkout.getMemberId(), checkout));
-		saveToStorage(StorageType.CHECKOUTRECORDS, checkoutRecords);
-	}
+
 	static void loadBookMap(List<Book> bookList) {
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		bookList.forEach(book -> books.put(book.getIsbn(), book));
@@ -167,6 +149,12 @@ public class DataAccessFacade implements DataAccess {
 	@Override
 	public void updateBooks(HashMap<String, Book> bookHash) {
 		saveToStorage(StorageType.BOOKS, bookHash);
+		
+	}
+
+	@Override
+	public void updateMembers(HashMap<String, LibraryMember> librarymembers) {
+		saveToStorage(StorageType.MEMBERS, librarymembers);
 		
 	}
 	
